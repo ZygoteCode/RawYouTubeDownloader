@@ -28,7 +28,7 @@ public static class Helpers
 
         if (!isAudioOnly)
         {
-            cmd.StandardInput.WriteLine($"yt-dlp.exe -f bestvideo+bestaudio --merge-output-format mkv -o \"{outputFilePath}\" -N 16 {youtubeVideoURI}");
+            cmd.StandardInput.WriteLine($"yt-dlp.exe -f bestvideo+bestaudio --merge-output-format mkv -o \"{outputFilePath}\" --cookies cookies.txt -N 16 {youtubeVideoURI}");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             cmd.WaitForExit();
@@ -37,7 +37,7 @@ public static class Helpers
         {
             string tempFile = outputFilePath.Substring(0, outputFilePath.Length - ".wav".Length);
 
-            cmd.StandardInput.WriteLine($"yt-dlp.exe -f bestaudio -x --audio-quality 0 -o \"{tempFile}.%(ext)s\" -N 16 {youtubeVideoURI}");
+            cmd.StandardInput.WriteLine($"yt-dlp.exe -f bestaudio -x --audio-quality 0 -o \"{tempFile}.%(ext)s\" --cookies cookies.txt -N 16 {youtubeVideoURI}");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             cmd.WaitForExit();
